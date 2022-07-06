@@ -1,32 +1,39 @@
 import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const PayBtn = ({ data, amountText }) => {
-  const { merchant_uid, amount } = data;
+  const navigate = useNavigate();
 
   const onClickPayment = () => {
-    // 1. 가맹점 식별하기
+    // 1. 가맹점 식별하기, init 초기화
     const { IMP } = window;
     IMP.init('imp80796153');
 
     // 2. 결제 창 호출
-    const callback = res => {
+    const callback = async res => {
       console.log('res', res);
       //3. 결제 후 실행될 로직의 콜백 함수
-      const { success, imp_uid, merchant_uid, error_msg } = res;
+      const { success, status, imp_uid, merchant_uid, error_msg } = res;
 
       if (success) {
-        //결제 성공 시 jQuery로 HTTP 요청
-        alert('결제 성공');
-        axios
-          .post('/', {
+        //결제 성공 시 axios
+        alert('결제가 완료되었습니다.');
+        try {
+          const data = await axios.post('{endpoint}', {
+            imp_uid,
             merchant_uid,
-            amount,
-          })
-          .then(data => console.log('성공이다얏::', data));
+            status,
+          });
+
+          // 서버 결제 API 설공시 로직
+          navigate('/payment/result', { state: { imp_uid, merchant_uid } });
+        } catch (err) {
+          console.log('통신 에러 ::', err);
+        }
       } else {
-        alert(`결제 실패:: ${error_msg}`);
+        alert('결제 실패 ::', error_msg);
       }
     };
 
