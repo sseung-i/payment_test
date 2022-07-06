@@ -1,7 +1,7 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Payment from './pages/Payments/Payment';
-import PaymentResult from './pages/PaymentResult/PaymentResult';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Payment from "./pages/Payments/Payment";
+import PaymentResult from "./pages/PaymentResult/PaymentResult";
 
 const Router = () => {
   return (

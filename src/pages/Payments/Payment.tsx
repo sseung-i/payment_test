@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
-import PayBtn from './PayBtn';
+import React, { useState } from "react";
+import styled, { css } from "styled-components";
+import PayBtn from "./PayBtn";
 
 const Payment = () => {
   const [data, setData] = useState({
-    pg: 'html5_inicis', // PG사
-    pay_method: 'card', // 결제수단
+    pg: "html5_inicis", // PG사
+    pay_method: "card", // 결제수단
     merchant_uid: `imp_${new Date().getTime()}`, // 주문번호
-    name: '주문명이 들어갈 자리야', // 주문명
+    name: "주문명이 들어갈 자리야", // 주문명
     amount: 10, // 결제금액
-    buyer_email: 'example@example', // 구매자 이메일
-    buyer_name: '홍길동', // 구매자 이름
-    buyer_tel: '010-1234-1234', // 구매자 전화번호
-    buyer_addr: '신사동 661-16', // 구매자 주소
-    buyer_postcode: '06018', // 구매자 우편번호
+    buyer_email: "example@example", // 구매자 이메일
+    buyer_name: "홍길동", // 구매자 이름
+    buyer_tel: "010-1234-1234", // 구매자 전화번호
+    buyer_addr: "신사동 661-16", // 구매자 주소
+    buyer_postcode: "06018", // 구매자 우편번호
   });
 
   const { amount, name, buyer_name, buyer_tel, buyer_postcode, buyer_addr } =

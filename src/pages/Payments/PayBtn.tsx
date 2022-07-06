@@ -1,39 +1,48 @@
-import React from 'react';
-import styled from 'styled-components';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { PaymentData, callbackRes } from "../../types/commonTypes";
 
-const PayBtn = ({ data, amountText }) => {
+const PayBtn = ({
+  data,
+  amountText,
+}: {
+  data: PaymentData;
+  amountText: string;
+}) => {
   const navigate = useNavigate();
 
   const onClickPayment = () => {
     // 1. 가맹점 식별하기, init 초기화
-    const { IMP } = window;
-    IMP.init('imp80796153');
+    const { IMP }: any = window;
+    IMP.init("imp80796153");
 
     // 2. 결제 창 호출
-    const callback = async res => {
-      console.log('res', res);
+    const callback = async (res: callbackRes) => {
+      console.log("res", res);
       //3. 결제 후 실행될 로직의 콜백 함수
       const { success, status, imp_uid, merchant_uid, error_msg } = res;
 
       if (success) {
         //결제 성공 시 axios
-        alert('결제가 완료되었습니다.');
+        alert("결제가 완료되었습니다.");
         try {
-          const data = await axios.post('{endpoint}', {
+          const data = await axios.post("{endpoint}", {
             imp_uid,
             merchant_uid,
             status,
           });
 
+          console.log("응답 데이터", data);
+
           // 서버 결제 API 설공시 로직
-          navigate('/payment/result', { state: { imp_uid, merchant_uid } });
+          navigate("/payment/result", { state: { imp_uid, merchant_uid } });
         } catch (err) {
-          console.log('통신 에러 ::', err);
+          console.log("통신 에러 ::", err);
         }
       } else {
-        alert('결제 실패 ::', error_msg);
+        alert(`결제 실패 : ${error_msg}`);
       }
     };
 
