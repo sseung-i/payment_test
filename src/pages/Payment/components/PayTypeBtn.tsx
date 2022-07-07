@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { PayBtnProps } from "../../types/commonTypes";
+import { PayBtnProps } from "../../../types/commonTypes";
 
 const PayTypeBtn = ({ name, isPayType, payTypeClick, id }: PayBtnProps) => {
   return (
@@ -25,17 +25,19 @@ const Btn = styled.li<BgClor>`
   label {
     display: inline-block;
     padding: 10px 30px;
-    border: 1px solid #ddd;
     border-radius: 5px;
+    border: 1px solid orange;
+    color: orange;
     ${({ isPayType }) => {
       if (!isPayType) {
         return css`
           background: #eee;
+          border: 1px solid #ddd;
           color: #bbb;
           cursor: pointer;
         `;
       }
-    }}
+    }};
   }
 
   input[type="radio"] {

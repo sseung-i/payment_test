@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
-import PayBtn from "./PayBtn";
-import ShippingInput from "./ShippingInput";
 import { BASIC_PGS, SIMPLE_PGS } from "./constants";
-import PayTypeBtn from "./PayTypeBtn";
-import Product from "./Product";
+import PayBtn from "./components/PayBtn";
+import ShippingInput from "./components/ShippingInput";
+import PayTypeBtn from "./components/PayTypeBtn";
+import Product from "./components/Product";
 
 const Payment = () => {
   const [data, setData] = useState({
@@ -13,7 +13,7 @@ const Payment = () => {
     pay_method: "", // 결제수단
     merchant_uid: `imp_${new Date().getTime()}`, // 주문번호 (고유한 번호 사용해야함으로 Date 사용)
     name: "여름옷 장만 !!", // 주문명
-    amount: 10, // 결제금액
+    amount: 63000, // 결제금액
     buyer_email: "", // 구매자 이메일
     buyer_name: "", // 구매자 이름
     buyer_tel: "", // 구매자 전화번호
@@ -86,8 +86,6 @@ const Payment = () => {
     const { value } = e.target;
     setData((prev) => ({ ...prev, pg: value }));
   };
-
-  console.log(data);
 
   return (
     <PaymentWrap>
@@ -238,6 +236,14 @@ const infoStyle = css`
     padding-bottom: 10px;
     color: #666;
   }
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+
+    h3 {
+      margin-bottom: 10px;
+    }
+  }
 `;
 
 const BuyerInfo = styled.section`
@@ -247,6 +253,10 @@ const BuyerInfo = styled.section`
     width: 60%;
     flex-direction: column;
     gap: 5px;
+
+    @media (max-width: 600px) {
+      width: 100%;
+    }
   }
 `;
 

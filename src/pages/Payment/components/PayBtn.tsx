@@ -1,16 +1,10 @@
+import axios from "axios";
 import React from "react";
 import styled from "styled-components";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { PaymentData, callbackRes } from "../../types/commonTypes";
+import { PayBtnPropsType, callbackRes } from "../../../types/commonTypes";
 
-const PayBtn = ({
-  data,
-  amountText,
-}: {
-  data: PaymentData;
-  amountText: string;
-}) => {
+const PayBtn = ({ data, amountText }: PayBtnPropsType) => {
   const navigate = useNavigate();
 
   const onClickPayment = () => {
@@ -53,7 +47,8 @@ const PayBtn = ({
 };
 
 const Btn = styled.button`
-  padding: 10px 30px;
+  width: 100%;
+  padding: 10px 0;
   border: 0;
   border-radius: 7px;
   font-size: 1.2rem;

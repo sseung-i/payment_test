@@ -7,7 +7,7 @@ interface PaymentDisplyObject {
   biz_num?: string;
 }
 
-export interface PaymentData {
+interface PaymentData {
   pg?: string;
   pay_method: string;
   escrow?: boolean;
@@ -26,6 +26,17 @@ export interface PaymentData {
   confirm_url?: string;
   notice_url?: string | Array<string>;
   display?: PaymentDisplyObject;
+}
+
+export interface PayBtnPropsType {
+  data: PaymentData;
+  amountText: string;
+}
+
+export interface ProductPropsType {
+  name: string;
+  price: string;
+  allProduct?: string;
 }
 
 export interface callbackRes {

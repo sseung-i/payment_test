@@ -1,15 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { ProductPropsType } from "../../../types/commonTypes";
 
-const Product = ({
-  name,
-  price,
-  allProduct,
-}: {
-  name: string;
-  price: string;
-  allProduct?: string;
-}) => {
+const Product = ({ name, price, allProduct }: ProductPropsType) => {
   return (
     <Item>
       <div className="info">
