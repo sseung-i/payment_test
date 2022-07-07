@@ -13,7 +13,7 @@ const Payment = () => {
     pay_method: "", // 결제수단
     merchant_uid: `imp_${new Date().getTime()}`, // 주문번호 (고유한 번호 사용해야함으로 Date 사용)
     name: "여름옷 장만 !!", // 주문명
-    amount: 10, // 결제금액
+    amount: 64000, // 결제금액
     buyer_email: "", // 구매자 이메일
     buyer_name: "", // 구매자 이름
     buyer_tel: "", // 구매자 전화번호
@@ -68,10 +68,8 @@ const Payment = () => {
 
   const changeUserData = (e: any): void => {
     const dataKey = e.target.dataset.text;
-    console.log("=================================================");
-    console.log(e.target.value);
+
     setData((prev) => ({ ...prev, [dataKey]: e.target.value }));
-    console.log(data);
   };
 
   const changeAmountStyle = () => {

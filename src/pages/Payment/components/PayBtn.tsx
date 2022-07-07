@@ -16,7 +16,6 @@ const PayBtn = ({ data, amountText }: Props) => {
   const afterPayment = async (res: callbackRes) => {
     //3. 결제 후 실행될 로직의 콜백 함수
     const { success, status, imp_uid, merchant_uid, error_msg } = res;
-    console.log(res);
 
     if (success) {
       //결제 성공 시 axios
