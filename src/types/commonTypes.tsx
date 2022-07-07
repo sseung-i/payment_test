@@ -7,7 +7,7 @@ interface PaymentDisplyObject {
   biz_num?: string;
 }
 
-interface PaymentData {
+export interface PaymentData {
   pg?: string;
   pay_method: string;
   escrow?: boolean;
@@ -26,17 +26,6 @@ interface PaymentData {
   confirm_url?: string;
   notice_url?: string | Array<string>;
   display?: PaymentDisplyObject;
-}
-
-export interface PayBtnPropsType {
-  data: PaymentData;
-  amountText: string;
-}
-
-export interface ProductPropsType {
-  name: string;
-  price: string;
-  allProduct?: string;
 }
 
 export interface callbackRes {
@@ -65,21 +54,4 @@ export interface callbackRes {
   vbank_name?: string;
   vbank_holder?: string;
   vbank_date?: number;
-}
-
-export interface ShippingProps {
-  inputType: string;
-  name: string;
-  id?: string;
-  value: string;
-  changeUserData?: JSX.IntrinsicElements["input"]["onChange"];
-  important?: boolean;
-}
-
-export interface PayBtnProps {
-  name: string;
-  isPayType: boolean;
-  // payTypeClick: any;
-  payTypeClick?: JSX.IntrinsicElements["label"]["onClick"];
-  id?: string;
 }

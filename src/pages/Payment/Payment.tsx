@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import styled, { css } from "styled-components";
 import { BASIC_PGS, SIMPLE_PGS } from "./constants";
 import PayBtn from "./components/PayBtn";
 import ShippingInput from "./components/ShippingInput";
 import PayTypeBtn from "./components/PayTypeBtn";
 import Product from "./components/Product";
+import * as S from "./Payment.style";
 
 const Payment = () => {
   const [data, setData] = useState({
@@ -13,7 +13,7 @@ const Payment = () => {
     pay_method: "", // 결제수단
     merchant_uid: `imp_${new Date().getTime()}`, // 주문번호 (고유한 번호 사용해야함으로 Date 사용)
     name: "여름옷 장만 !!", // 주문명
-    amount: 63000, // 결제금액
+    amount: 10, // 결제금액
     buyer_email: "", // 구매자 이메일
     buyer_name: "", // 구매자 이름
     buyer_tel: "", // 구매자 전화번호
@@ -68,8 +68,10 @@ const Payment = () => {
 
   const changeUserData = (e: any): void => {
     const dataKey = e.target.dataset.text;
-
+    console.log("=================================================");
+    console.log(e.target.value);
     setData((prev) => ({ ...prev, [dataKey]: e.target.value }));
+    console.log(data);
   };
 
   const changeAmountStyle = () => {
@@ -88,22 +90,22 @@ const Payment = () => {
   };
 
   return (
-    <PaymentWrap>
+    <S.PaymentWrap>
       <h2>주문/결제</h2>
-      <ItemsInfo>
-        <InfoList>
+      <S.ItemsInfo>
+        <S.InfoList>
           <li>상품정보</li>
           <li>가격</li>
-        </InfoList>
-        <Products>
+        </S.InfoList>
+        <S.Products>
           <Product
             name={name}
             allProduct="헤르미온 원피스(Free), 피크닉 단가라 셔츠(95)"
             price={changeAmountStyle()}
           />
-        </Products>
-      </ItemsInfo>
-      <BuyerInfo>
+        </S.Products>
+      </S.ItemsInfo>
+      <S.BuyerInfo>
         <h3>배송지정보</h3>
         <ul>
           <ShippingInput
@@ -143,11 +145,11 @@ const Payment = () => {
             changeUserData={changeUserData}
           />
         </ul>
-      </BuyerInfo>
-      <PayInfo>
+      </S.BuyerInfo>
+      <S.PayInfo>
         <h3>결제수단</h3>
         <div>
-          <PayType>
+          <S.PayType>
             <PayTypeBtn
               name="빠른결제"
               isPayType={pay_method === ""}
@@ -159,9 +161,9 @@ const Payment = () => {
               payTypeClick={payTypeClick}
               id="card"
             />
-          </PayType>
+          </S.PayType>
           {payType === "빠른결제" ? (
-            <PaymentList
+            <S.PaymentList
               onChange={selectPaymentList}
               defaultValue={SIMPLE_PGS[0].value}
             >
@@ -170,9 +172,9 @@ const Payment = () => {
                   {label}
                 </option>
               ))}
-            </PaymentList>
+            </S.PaymentList>
           ) : (
-            <PaymentList
+            <S.PaymentList
               onChange={selectPaymentList}
               defaultValue={BASIC_PGS[0].value}
             >
@@ -181,107 +183,15 @@ const Payment = () => {
                   {label}
                 </option>
               ))}
-            </PaymentList>
+            </S.PaymentList>
           )}
         </div>
-      </PayInfo>
-      <BtnWrap>
+      </S.PayInfo>
+      <S.BtnWrap>
         <PayBtn data={data} amountText={changeAmountStyle()} />
-      </BtnWrap>
-    </PaymentWrap>
+      </S.BtnWrap>
+    </S.PaymentWrap>
   );
 };
-
-const PaymentWrap = styled.div`
-  max-width: 800px;
-  margin: 100px auto;
-  padding: 30px;
-  box-shadow: 0 0 10px 0 #0002;
-  background-color: #fff;
-
-  h2 {
-    padding-bottom: 10px;
-  }
-`;
-
-const InfoList = styled.ul`
-  display: flex;
-  padding: 14px 0;
-  background: #eee;
-
-  li {
-    width: 50%;
-    text-align: center;
-  }
-`;
-
-const ItemsInfo = styled.section``;
-
-const Products = styled.ul`
-  display: flex;
-  padding: 30px 0;
-  border-bottom: 2px solid #eee;
-
-  &:not(:last-child) {
-    border-bottom: 2px dashed #eee;
-  }
-`;
-
-const infoStyle = css`
-  display: flex;
-  padding: 30px 0;
-
-  h3 {
-    width: 20%;
-    padding-bottom: 10px;
-    color: #666;
-  }
-
-  @media (max-width: 600px) {
-    flex-direction: column;
-
-    h3 {
-      margin-bottom: 10px;
-    }
-  }
-`;
-
-const BuyerInfo = styled.section`
-  ${infoStyle}
-  ul {
-    display: flex;
-    width: 60%;
-    flex-direction: column;
-    gap: 5px;
-
-    @media (max-width: 600px) {
-      width: 100%;
-    }
-  }
-`;
-
-const BtnWrap = styled.section`
-  display: flex;
-  justify-content: center;
-`;
-
-const PayInfo = styled.section`
-  ${infoStyle}
-  border-top: 1px dashed #ddd;
-
-  > div {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-  }
-`;
-
-const PayType = styled.ul`
-  display: flex;
-`;
-
-const PaymentList = styled.select`
-  padding: 10px 20px;
-`;
 
 export default Payment;

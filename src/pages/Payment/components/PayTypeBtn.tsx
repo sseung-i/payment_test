@@ -1,8 +1,14 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { PayBtnProps } from "../../../types/commonTypes";
 
-const PayTypeBtn = ({ name, isPayType, payTypeClick, id }: PayBtnProps) => {
+interface Props {
+  name: string;
+  isPayType: boolean;
+  payTypeClick?: JSX.IntrinsicElements["label"]["onClick"];
+  id?: string;
+}
+
+const PayTypeBtn = ({ name, isPayType, payTypeClick, id }: Props) => {
   return (
     <Btn isPayType={isPayType}>
       <input name="payType" id="payType" type="radio" />

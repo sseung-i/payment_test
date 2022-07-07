@@ -1,8 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { ProductPropsType } from "../../../types/commonTypes";
 
-const Product = ({ name, price, allProduct }: ProductPropsType) => {
+interface Props {
+  name: string;
+  price: string;
+  allProduct?: string;
+}
+
+const Product = ({ name, price, allProduct }: Props) => {
   return (
     <Item>
       <div className="info">

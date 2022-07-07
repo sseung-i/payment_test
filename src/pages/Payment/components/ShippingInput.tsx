@@ -1,6 +1,14 @@
 import React from "react";
-import styled, { css } from "styled-components";
-import { ShippingProps } from "../../../types/commonTypes";
+import styled from "styled-components";
+
+interface Props {
+  inputType: string;
+  name: string;
+  id?: string;
+  value: string;
+  changeUserData?: JSX.IntrinsicElements["input"]["onKeyUp"];
+  important?: boolean;
+}
 
 const ShippingInput = ({
   inputType,
@@ -9,36 +17,30 @@ const ShippingInput = ({
   value,
   changeUserData,
   important,
-}: ShippingProps) => {
+}: Props) => {
   return (
-    <Input isStar={important}>
+    <Input>
+      {important && <Important>*</Important>}
       <label htmlFor="shipping">{name}</label>
       <input
         data-text={id}
         id="shipping"
         type={inputType}
         defaultValue={value}
-        onChange={changeUserData}
+        onKeyUp={changeUserData}
       />
     </Input>
   );
 };
 
-interface Star {
-  isStar?: boolean;
-}
-
-const star = css`
-  &::before {
-    content: "*";
-    position: absolute;
-    left: -10px;
-    width: 10px;
-    color: red;
-  }
+const Important = styled.span`
+  position: absolute;
+  left: -10px;
+  width: 10px;
+  color: red;
 `;
 
-const Input = styled.li<Star>`
+const Input = styled.li`
   position: relative;
   display: flex;
   width: 100%;
@@ -55,7 +57,6 @@ const Input = styled.li<Star>`
     margin-right: 10px;
     font-size: 0.9em;
     word-break: keep-all;
-    ${({ isStar }) => isStar && star}
   }
 
   input {
