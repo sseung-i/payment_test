@@ -55,3 +55,20 @@ export interface callbackRes {
   vbank_holder?: string;
   vbank_date?: number;
 }
+
+export interface ShippingProps {
+  inputType: string;
+  name: string;
+  id?: string;
+  value: string;
+  changeUserData?: JSX.IntrinsicElements["input"]["onChange"];
+  important?: boolean;
+}
+
+export interface PayBtnProps {
+  name: string;
+  isPayType: boolean;
+  // payTypeClick: any;
+  payTypeClick?: JSX.IntrinsicElements["label"]["onClick"];
+  id?: string;
+}
